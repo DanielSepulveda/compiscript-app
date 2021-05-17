@@ -26,6 +26,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-code" color={color} />
           ),
+          tabBarLabel: "Editor",
         }}
       />
       <BottomTab.Screen
@@ -35,6 +36,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-code" color={color} />
           ),
+          tabBarLabel: "Terminal",
         }}
       />
     </BottomTab.Navigator>
