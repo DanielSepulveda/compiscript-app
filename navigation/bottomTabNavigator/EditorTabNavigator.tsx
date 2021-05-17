@@ -1,8 +1,8 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import TabOneScreen from "@screens/TabOneScreen";
-import { EditorTabParamList } from "@types";
+import TabOneScreen from "../../screens/EditorTabScreen";
+import { EditorTabParamList } from "../../types";
 
 const EdtiorTabStack = createStackNavigator<EditorTabParamList>();
 

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import TabTwoScreen from "@screens/TabTwoScreen";
-import { TerminalTabParamList } from "@types";
+import TabTwoScreen from "../../screens/TerminalTabScreen";
+import { TerminalTabParamList } from "../../types";
 
 const TerminalTabStack = createStackNavigator<TerminalTabParamList>();
 

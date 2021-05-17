@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 
-import Colors from "@constants/Colors";
-import useColorScheme from "@hooks/useColorScheme";
-import { BottomTabParamList } from "@types";
-import TabBarIcon from "@components/TabBarIcon";
+import Colors from "../../constants/Colors";
+import useColorScheme from "../../hooks/useColorScheme";
+import { BottomTabParamList } from "../../types";
+import TabBarIcon from "../../components/TabBarIcon";
 
 import EditorTabNavigator from "./EditorTabNavigator";
 import TerminalTabNavigator from "./TerminalTabNavigator";
