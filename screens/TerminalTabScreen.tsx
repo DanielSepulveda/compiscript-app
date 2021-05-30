@@ -3,7 +3,6 @@ import {
   StyleSheet,
   TextInput,
   Keyboard,
-  Platform,
   TouchableWithoutFeedback,
 } from "react-native";
 import { Button } from "react-native-elements";
@@ -16,6 +15,7 @@ import { nanoid } from "nanoid";
 import { View } from "../components/themed";
 import { useCodeStore, CodeState } from "../stores/codeStore";
 import { MonoText } from "../components/StyledText";
+import useColorScheme from "../hooks/useColorScheme";
 
 const selector = (state: CodeState) => state.code;
 
@@ -33,6 +33,7 @@ export default function TerminalTabScreen() {
   const [input, setInput] = React.useState("");
   const code = useCodeStore(selector);
   const [output, setOutput] = React.useState<OutputItem[]>([]);
+  const theme = useColorScheme();
 
   const handleExecuteCode = async () => {
     setOutput([]);
@@ -73,26 +74,48 @@ export default function TerminalTabScreen() {
     setInputState("disabled");
   };
 
+  const outputTextColor = theme === "light" ? "black" : "#E4E4E7";
+
   return (
-    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+    <KeyboardAwareScrollView
+      contentContainerStyle={[
+        styles.container,
+        { backgroundColor: theme === "light" ? "#F3F4F6" : "#18181B" },
+      ]}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{ flex: 1, backgroundColor: "#F3F4F6" }}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: theme === "light" ? "#F3F4F6" : "#18181B",
+          }}
+        >
           <Button
             style={{ marginBottom: 16 }}
             title="Ejecutar codigo"
             onPress={handleExecuteCode}
           />
-          <View style={styles.outputContainer}>
+          <View
+            style={[
+              styles.outputContainer,
+              { borderColor: theme === "light" ? "black" : "#F3F4F6" },
+            ]}
+          >
             {output.map((o) => (
               <MonoText
                 key={o.key}
-                style={{ color: o.isError ? "red" : "black" }}
+                style={{ color: o.isError ? "red" : outputTextColor }}
               >
                 {o.message}
               </MonoText>
             ))}
           </View>
-          <View style={styles.inputContainer}>
+          <View
+            style={[
+              styles.inputContainer,
+              { backgroundColor: theme === "light" ? "#F3F4F6" : "#18181B" },
+            ]}
+          >
             <TextInput
               ref={inputRef}
               style={styles.input}
@@ -123,7 +146,6 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     padding: 16,
-    backgroundColor: "#F3F4F6",
   },
   outputContainer: {
     flex: 1,
@@ -137,9 +159,9 @@ const styles = StyleSheet.create({
     height: 50,
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#F3F4F6",
   },
   input: {
+    backgroundColor: "#F3F4F6",
     flex: 1,
     color: "black",
     fontSize: 24,

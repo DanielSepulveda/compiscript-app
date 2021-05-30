@@ -3,8 +3,6 @@ import {
   StyleSheet,
   TextInput,
   Keyboard,
-  KeyboardAvoidingView,
-  Platform,
   TouchableWithoutFeedback,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -15,6 +13,7 @@ import RNPickerSelect from "react-native-picker-select";
 import { View } from "../components/themed";
 import { useCodeStore, CodeState } from "../stores/codeStore";
 import { TEST_SCRIPTS } from "../constants/testScripts";
+import useColorScheme from "../hooks/useColorScheme";
 
 const selector = (state: CodeState) => ({
   input: state.code,
@@ -39,6 +38,7 @@ const ITEMS: Item[] = [
 export default function EditorTabScreen() {
   const [select, setSelect] = React.useState("");
   const { input, setInput, clearCode } = useCodeStore(selector, shallow);
+  const theme = useColorScheme();
 
   const handleSelectTest = (value: string) => {
     setSelect(value);
@@ -49,10 +49,25 @@ export default function EditorTabScreen() {
   };
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+    <KeyboardAwareScrollView
+      contentContainerStyle={[
+        styles.container,
+        { backgroundColor: theme === "light" ? "#F3F4F6" : "#18181B" },
+      ]}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{ flex: 1, backgroundColor: "#F3F4F6" }}>
-          <View style={styles.actionsContainer}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: theme === "light" ? "#F3F4F6" : "#18181B",
+          }}
+        >
+          <View
+            style={[
+              styles.actionsContainer,
+              { backgroundColor: theme === "light" ? "#F3F4F6" : "#18181B" },
+            ]}
+          >
             <RNPickerSelect
               onValueChange={handleSelectTest}
               value={select}
@@ -69,9 +84,17 @@ export default function EditorTabScreen() {
             />
             <Button onPress={clearCode} title="Borrar" />
           </View>
-          <View style={styles.inputContainer}>
+          <View
+            style={[
+              styles.inputContainer,
+              { borderColor: theme === "light" ? "black" : "#F3F4F6" },
+            ]}
+          >
             <TextInput
-              style={styles.input}
+              style={[
+                styles.input,
+                { color: theme === "light" ? "black" : "#E4E4E7" },
+              ]}
               value={input}
               onChangeText={setInput}
               multiline
@@ -93,23 +116,21 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     padding: 16,
-    backgroundColor: "#F3F4F6",
   },
   actionsContainer: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,
-    backgroundColor: "#F3F4F6",
   },
   select: {
     flex: 1,
     borderWidth: 1,
-    borderColor: "black",
     display: "flex",
     justifyContent: "center",
     borderRadius: 4,
     marginRight: 8,
+    backgroundColor: "#F3F4F6",
   },
   selectInput: {
     padding: 8,
