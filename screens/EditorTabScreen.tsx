@@ -14,6 +14,7 @@ import RNPickerSelect from "react-native-picker-select";
 
 import { View } from "../components/themed";
 import { useCodeStore, CodeState } from "../stores/codeStore";
+import { TEST_SCRIPTS } from "../constants/testScripts";
 
 const selector = (state: CodeState) => ({
   input: state.code,
@@ -21,16 +22,31 @@ const selector = (state: CodeState) => ({
   clearCode: state.clearCode,
 });
 
-const ITEMS = [
+type Item = {
+  label: string;
+  value: keyof typeof TEST_SCRIPTS;
+};
+
+const ITEMS: Item[] = [
   { label: "Fibonacci recursivo", value: "fib_recursive" },
   { label: "Fibonacci iterativo", value: "fib_iterative" },
   { label: "Factorial recursivo", value: "fact_recursive" },
   { label: "Factorial iterativo", value: "fact_iterative" },
+  { label: "Saludo", value: "greet_user" },
+  { label: "Bubble sort", value: "bubble_sort" },
 ];
 
 export default function EditorTabScreen() {
   const [select, setSelect] = React.useState("");
   const { input, setInput, clearCode } = useCodeStore(selector, shallow);
+
+  const handleSelectTest = (value: string) => {
+    setSelect(value);
+    if (value !== null) {
+      const selectedTest = TEST_SCRIPTS[value as keyof typeof TEST_SCRIPTS];
+      setInput(selectedTest.trim());
+    }
+  };
 
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.container}>
@@ -38,7 +54,7 @@ export default function EditorTabScreen() {
         <View style={{ flex: 1, backgroundColor: "#F3F4F6" }}>
           <View style={styles.actionsContainer}>
             <RNPickerSelect
-              onValueChange={setSelect}
+              onValueChange={handleSelectTest}
               value={select}
               items={ITEMS}
               placeholder={{
