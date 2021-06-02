@@ -33,6 +33,8 @@ const ITEMS: Item[] = [
   { label: "Factorial iterativo", value: "fact_iterative" },
   { label: "Saludo", value: "greet_user" },
   { label: "Bubble sort", value: "bubble_sort" },
+  { label: "Busqueda", value: "find" },
+  { label: "Multiplicación matrices", value: "matrix_mult" },
 ];
 
 export default function EditorTabScreen() {

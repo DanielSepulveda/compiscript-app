@@ -41,7 +41,7 @@ export default function TerminalTabScreen() {
       const parsed = parser(code);
       const compiled = compiler(parsed);
       vm.init(compiled);
-      vm.execute({
+      await vm.execute({
         onOutput: (message) => {
           if (message === "\n") {
             setOutput((prev) => [...prev, { key: nanoid(), message: "" }]);

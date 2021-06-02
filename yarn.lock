@@ -1150,10 +1150,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@danielsepulveda/compiscript@^6.2.1":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@danielsepulveda/compiscript/-/compiscript-6.2.1.tgz#15e559293a6dae444525b09a760f3f44fc1e80a0"
-  integrity sha512-1nangt25BMbeq/4b8FItuRKPZa9BB+OOFWn8d5IxCXzyS57Cr0lBVLttLWAuZQ09388u8Nfp8lxxg/fG3qjD9Q==
+"@danielsepulveda/compiscript@^6.2.2":
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/@danielsepulveda/compiscript/-/compiscript-6.2.2.tgz#464774ba86eb1d6c882a58e7d67cd61c763cfd38"
+  integrity sha512-+JgydJZqbl9+Y3+2PrgB1+bqmKHFgwftDdzC+wDBoq6J0gO/aZClEm5+YFmOrG/wgufSyqsF2KCF7ueGE134LQ==
   dependencies:
     lodash "^4.17.21"
     mnemonist "^0.38.3"

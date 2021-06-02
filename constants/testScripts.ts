@@ -83,10 +83,7 @@ vars
   v[4], i, j, tmp: int;
 
 main() {
-  v[0] = 4;
-  v[1] = 3;
-  v[2] = 2;
-  v[3] = 1;
+  read(v[0], v[1], v[2], v[3]);
   
   i = 0;
   j = 0;
@@ -108,6 +105,88 @@ main() {
 }
 `;
 
+const find = `
+Program test;
+vars
+  v[5], i, n: int;
+
+int function find(n: int) {
+  i = 0;
+
+  while (i < 5) {
+    if (v[i] == n) {
+      return (1);
+    }
+    i = i + 1;
+  }
+
+  return (0);
+}
+
+main(){
+  println("Ingresa valores");
+
+  i = 0;
+  while (i < 5) {
+    println("Ingresa valor #", i + 1);
+    read(v[i]);
+    i = i + 1;
+  }
+  
+  println("Ingresa valor a buscar");
+  read(n);
+
+  if (find(n)) {
+    println("Valor encontrado");
+  } else {
+    println("Valor no encontrado");
+  }
+}
+`;
+
+const matrix_mult = `
+Program test;
+vars
+  a[2][2], b[2][2], c[2][2], i, j, k: int;
+
+main () {
+  a[0][0] = 1;
+  a[0][1] = 2;
+  a[1][0] = 3;
+  a[1][1] = 4;
+
+  b[0][0] = 4;
+  b[0][1] = 3;
+  b[1][0] = 2;
+  b[1][1] = 1;
+
+  c[0][0] = 0;
+  c[0][1] = 0;
+  c[1][0] = 0;
+  c[1][1] = 0;
+
+  for (i = 0) until (2 - 1) {
+    for (j = 0) until (2 - 1) {
+      for (k = 0) until (2 - 1) {
+        c[i][j] = c[i][j] + (a[i][k] * b[k][j]);
+        k = k + 1;
+      }
+      j = j + 1;
+    }
+    i = i + 1;
+  }
+
+  for (i = 0) until (2 - 1) {
+    for (j = 0) until (2 - 1) {
+      print(c[i][j], " ");
+      j = j + 1;
+    }
+    println("");
+    i = i + 1;
+  }
+}
+`;
+
 export const TEST_SCRIPTS = {
   fib_recursive,
   fib_iterative,
@@ -115,4 +194,6 @@ export const TEST_SCRIPTS = {
   fact_iterative,
   greet_user,
   bubble_sort,
+  find,
+  matrix_mult,
 };
